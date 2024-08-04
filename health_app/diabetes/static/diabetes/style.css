@@ -1,14 +1,13 @@
-h1
- {
+h1 {
     color:black;
- }
+}
  
- body {
+body {
     background-color: lightblue;
     margin: 0px;
     padding: 0px;
 }
- 
+
 .text {
     color: black;
     font-family: cursive;

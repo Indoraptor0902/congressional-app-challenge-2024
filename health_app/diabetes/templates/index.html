@@ -26,12 +26,12 @@
         </div>
         
 
-        <form method="POST">
+        <form class="text" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Predict</button>
         </form>
-        <p>{{statement}}</p>
+        <p class="text">{{statement}}</p>
 
     </body>
 </html>
