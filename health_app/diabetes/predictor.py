@@ -43,10 +43,10 @@ class DiabetesPredictor:
         return confusion_matrix(self.y_test, self.y_pred)
     
     def f1_score(self):
-        return f1_score(self.y_test, self.y_pred)
+        return np.mean(cross_val_score(self.classifier, self.X, self.y, cv=10, scoring="f1"))
     
     def accuracy_score(self):
-        return accuracy_score(self.y_test, self.y_pred)
+        return np.mean(cross_val_score(self.classifier, self.X, self.y, cv=10, scoring="accuracy"))
     
     def has_diabetes(self, user_input: list) -> bool:
         # Ensure the input is a list of floats
