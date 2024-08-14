@@ -121,7 +121,7 @@ STATIC_URL = 'static/'
 
 # Define the directories where Django should look for static files
 STATICFILES_DIRS = [
-    BASE_DIR / 'diabetes/static'
+    BASE_DIR / 'static'
 ]
 
 # Define the directory to collect all static files for production

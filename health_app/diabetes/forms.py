@@ -6,6 +6,7 @@ class DiabetesPredictionForm(forms.Form):
     bloodpressure = forms.IntegerField(label="Diastolic Blood Pressure")
     skinthickness = forms.IntegerField(label="Skin Thickness")
     insulin = forms.IntegerField(label="Insulin")
-    bmi = forms.FloatField(label="BMI")
+    height = forms.FloatField(label="Height (Inches)")
+    weight = forms.FloatField(label="Weight (Pounds)")
     diabetespedigreefunction = forms.FloatField(label="Diabetes Pedigree Function")
     age = forms.IntegerField(label="Age")
