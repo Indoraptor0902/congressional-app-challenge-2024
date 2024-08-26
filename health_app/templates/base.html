@@ -21,10 +21,13 @@
  
         </div>
         <div class="header">
-            <h1>Diabetes Risk Analysis</h1>
-            <p>Find out if you're at risk</p>
+            <h1>{% block heading %}{% endblock %}</h1>
+            <p>{% block subheading %}{% endblock %}</p>
         </div>
         
+        {% block content %}
+
+        {% endblock %}
 
     </body>
 </html>
