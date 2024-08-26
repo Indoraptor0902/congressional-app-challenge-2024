@@ -1,37 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        {% load static %}
-        <link rel="stylesheet"  href="{% static 'css/style.css' %}">
-        <title>Diabetes Predictor</title>
-    </head>
-    <body>
-        <div class="header-box">
-            <nav class="nav">
-                <ul>
-                    <li>
-                        <a href="/">Home</a></li>
-                    <li>
-                        
-                    </li>
-                </ul>
- 
- 
-            </nav>
- 
-        </div>
-        <div class="header">
-            <h1>Diabetes Risk Analysis</h1>
-            <p>Find out if you're at risk</p>
-        </div>
-        
+{% extends 'base.html' %}
 
-        <form class="text" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Predict</button>
-        </form>
-        <p class="text">{{statement}}</p>
+{% block heading %}
+Diabetes Risk Analysis
+{% endblock %}
 
-    </body>
-</html>
+{% block subheading %}
+Find out if you're at risk
+{% endblock %}
+
+{% block content %}
+<form class="text" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Predict</button>
+</form>
+<p class="text">{{statement}}</p>
+{% endblock %}
