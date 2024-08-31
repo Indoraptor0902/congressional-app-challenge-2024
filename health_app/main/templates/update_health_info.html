@@ -6,7 +6,7 @@ Update Your Health Information
 
 {% block content %}
     
-<form method="POST">
+<form class="text" method="POST">
     {% csrf_token %}
     
     <label for="age">Age:</label>
@@ -23,8 +23,6 @@ Update Your Health Information
 
     <label for="blood_pressure">Blood Pressure:</label>
     <input type="number" id="blood_pressure" name="blood_pressure" value="{{ health_info.blood_pressure }}"><br><br>
-
-    <!-- Add additional fields as necessary -->
 
     <button type="submit">Save</button>
 </form>
