@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block heading %}
+Update Your Health Information
+{% endblock %}
+
+{% block content %}
+    
+<form method="POST">
+    {% csrf_token %}
+    
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" value="{{ health_info.age }}"><br><br>
+
+    <label for="bmi">BMI:</label>
+    <input type="number" step="0.1" id="bmi" name="bmi" value="{{ health_info.bmi }}"><br><br>
+
+    <label for="insulin">Insulin:</label>
+    <input type="number" id="insulin" name="insulin" value="{{ health_info.insulin }}"><br><br>
+
+    <label for="glucose">Glucose:</label>
+    <input type="number" id="glucose" name="glucose" value="{{ health_info.glucose }}"><br><br>
+
+    <label for="blood_pressure">Blood Pressure:</label>
+    <input type="number" id="blood_pressure" name="blood_pressure" value="{{ health_info.blood_pressure }}"><br><br>
+
+    <!-- Add additional fields as necessary -->
+
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}
+
