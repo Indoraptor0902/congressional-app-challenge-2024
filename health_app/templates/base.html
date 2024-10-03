@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet"  href="{% static 'css/style.css' %}">
+        <title>Diabetes Predictor</title>
+    </head>
+    <body>
+        <div class="header-box">
+            <nav class="nav">
+                <ul>
+                    <li>
+                        <a href="/">Home</a></li>
+                    <li>
+                        
+                    </li>
+                </ul>
+ 
+ 
+            </nav>
+ 
+        </div>
+        <div class="header">
+            <h1>{% block heading %}{% endblock %}</h1>
+            <p>{% block subheading %}{% endblock %}</p>
+        </div>
+        
+        {% block content %}
+
+        {% endblock %}
+
+    </body>
+</html>

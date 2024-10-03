@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, f1_score, accuracy_score
@@ -34,7 +34,7 @@ class DiabetesPredictor:
         self.X_test = self.sc_X.transform(self.X_test)
     
     def train(self):
-        self.classifier = KNeighborsClassifier(n_neighbors=11, p=2, metric='euclidean')
+        self.classifier = KNeighborsClassifier(n_neighbors=13, p=2, metric='euclidean')
         self.classifier.fit(self.X_train, self.y_train)
 
         self.y_pred = self.classifier.predict(self.X_test)
@@ -43,12 +43,12 @@ class DiabetesPredictor:
         return confusion_matrix(self.y_test, self.y_pred)
     
     def f1_score(self):
-        return f1_score(self.y_test, self.y_pred)
+        return np.mean(cross_val_score(self.classifier, self.X, self.y, cv=10, scoring="f1"))
     
     def accuracy_score(self):
-        return accuracy_score(self.y_test, self.y_pred)
+        return np.mean(cross_val_score(self.classifier, self.X, self.y, cv=10, scoring="accuracy"))
     
-    def has_diabetes(self, user_input: list):
+    def has_diabetes(self, user_input: list) -> bool:
         # Ensure the input is a list of floats
         user_data = list(map(float, user_input))
         

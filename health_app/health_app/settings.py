@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'diabetes',
+    'diabetes.apps.DiabetesConfig',
+    'main.apps.MainConfig',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'health_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,7 +122,7 @@ STATIC_URL = 'static/'
 
 # Define the directories where Django should look for static files
 STATICFILES_DIRS = [
-    BASE_DIR / 'diabetes/static'
+    BASE_DIR / 'static'
 ]
 
 # Define the directory to collect all static files for production

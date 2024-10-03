@@ -10,13 +10,14 @@ def predict_diabetes(request):
         form = DiabetesPredictionForm(request.POST)
         if form.is_valid():
             predictor = DiabetesPredictor()
+            print((form.cleaned_data["weight"] * 703) / (form.cleaned_data["height"] ** 2))
             user_values = [
                 form.cleaned_data["pregnancies"],
                 form.cleaned_data["glucose"],
                 form.cleaned_data["bloodpressure"],
                 form.cleaned_data["skinthickness"],
                 form.cleaned_data["insulin"],
-                form.cleaned_data["bmi"],
+                (form.cleaned_data["weight"] * 703) / (form.cleaned_data["height"] ** 2),
                 form.cleaned_data["diabetespedigreefunction"],
                 form.cleaned_data["age"],
             ]
