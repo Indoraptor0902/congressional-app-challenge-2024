@@ -1,8 +1,12 @@
+# ENVIRONMENT SETUP FOR CLUSTER-LEVEL CAUSAL EDITING
+# ================================
+
 import os
 import sys
 import subprocess
 
 def install_dependencies(packages):
+    """Install required packages via pip."""
     try:
         subprocess.check_call([sys.executable, "-m", "pip", "install"] + packages)
         print(f"Successfully installed: {packages}")
@@ -11,6 +15,7 @@ def install_dependencies(packages):
         sys.exit(1)
 
 def check_cuda():
+    """Check CUDA availability."""
     try:
         import torch
         if torch.cuda.is_available():
@@ -20,27 +25,55 @@ def check_cuda():
     except ImportError:
         print("PyTorch not installed; CUDA check skipped.")
 
-# --- Install all dependencies for both will-smna and cluster-level causal editing ---
-base_packages = [
-    "numpy", "tqdm", "matplotlib", "scikit-learn", "transformers",
-    "huggingface_hub", "accelerate", "torch", "torchvision", "torchaudio"
+# ---- ALL REQUIRED PACKAGES FOR ADVANCED CAUSAL EDITING ----
+core_packages = [
+    # Deep learning & scientific computing
+    "torch", "torchvision", "torchaudio", "numpy", "scipy",
+    # Progress bars, pretty printing, and utilities
+    "tqdm", "colorama", "rich",
+    # Data science and plotting
+    "matplotlib", "seaborn", "plotly", "pandas",
+    # Clustering & dimensionality reduction
+    "scikit-learn", "umap-learn", "hdbscan",
+    # NLP and transformers
+    "transformers", "huggingface_hub", "accelerate", "sentencepiece",
+    # Adapter fine-tuning
+    "peft",
+    # Datasets and evaluation
+    "datasets", "ragas",
+    # Miscellaneous
+    "networkx", "filelock", "fsspec", "pyarrow", "xxhash"
 ]
-cluster_editing_packages = [
-    "peft", "ragas", "umap-learn", "plotly", "datasets"
-]
-install_dependencies(base_packages + cluster_editing_packages)
+
+install_dependencies(core_packages)
 check_cuda()
 
-# --- Print versions for sanity check ---
+# ---- PRINT LIBRARY VERSIONS FOR REPRODUCIBILITY ----
 import numpy as np
 import torch
 import transformers
+import sklearn
+import umap
+import hdbscan
+import matplotlib
+import plotly
+import pandas as pd
+
+print("\n=== Library Versions ===")
+print(f"Python: {sys.version}")
 print(f"Numpy: {np.__version__}")
 print(f"Torch: {torch.__version__}")
 print(f"Transformers: {transformers.__version__}")
+print(f"scikit-learn: {sklearn.__version__}")
+print(f"UMAP: {umap.__version__}")
+print(f"HDBSCAN: {hdbscan.__version__}")
+print(f"matplotlib: {matplotlib.__version__}")
+print(f"plotly: {plotly.__version__}")
+print(f"pandas: {pd.__version__}")
+print("========================\n")
 
-# --- PARTIAL CLUSTER-LEVEL CAUSAL EDITING FRAMEWORK CODE (stubs and comments) ---
-# This is a preview of the key framework logic you'll be able to run after setup.
+# ---- PARTIAL CLUSTER-LEVEL CAUSAL EDITING FRAMEWORK STUBS ----
+# These stubs show the structure and intent of your advanced pipeline.
 
 # from peft import LoraConfig, get_peft_model
 # from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -48,6 +81,13 @@ print(f"Transformers: {transformers.__version__}")
 # from umap import UMAP
 
 # class CausalClusterEditor:
+#     """
+#     Cluster-Level Causal Editing for Language Models via Probing-Guided Adapter Updates.
+#     - Probes a frozen model to trace harmful token activations to attention heads and embedding subspaces.
+#     - Clusters toxic tokens via shared activation signatures.
+#     - Plans and applies localized mitigations (logit nudging, adapter updates, or prompt scaffolding).
+#     - Verifies via causal re-probing to ensure persistent suppression.
+#     """
 #     def __init__(self, model_name, device='cuda'):
 #         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
 #         self.model = AutoModelForCausalLM.from_pretrained(
@@ -59,28 +99,27 @@ print(f"Transformers: {transformers.__version__}")
 #                 bnb_4bit_compute_dtype=torch.bfloat16
 #             )
 #         )
-#         # PEFT/LoRA setup for adapter-based edits
 #         self.lora_config = LoraConfig(
 #             r=16, lora_alpha=32, lora_dropout=0.1,
 #             task_type="CAUSAL_LM", target_modules=["q_proj", "v_proj"]
 #         )
 #         self.adapter = get_peft_model(self.model, self.lora_config)
-#         print("CausalClusterEditor initialized with quantized model and LoRA adapter.")
+#         print("CausalClusterEditor initialized.")
 
 #     def probe_activations(self, prompts, layer_idx):
-#         # Extracts model activations for clustering
+#         """Extracts model activations for clustering."""
 #         pass
 
 #     def cluster_activations(self, activations):
-#         # Uses UMAP + HDBSCAN to find semantically related harmful clusters
+#         """Clusters activation signatures using UMAP and HDBSCAN."""
 #         pass
 
 #     def plan_and_apply_edits(self, clusters):
-#         # Plans and applies minimal, targeted adapter updates
+#         """Plans and applies minimal, targeted adapter updates."""
 #         pass
 
 #     def verify_effect(self, prompts):
-#         # Reprobes to check for reduction in harmful outputs
+#         """Reprobes to check for reduction in harmful outputs."""
 #         pass
 
 # # Example usage after environment setup:
@@ -91,5 +130,3 @@ print(f"Transformers: {transformers.__version__}")
 # # editor.plan_and_apply_edits(clusters)
 # # editor.verify_effect(toxic_prompts)
 
-print("\nEnvironment and partial framework code ready!")
-print("You can now run both will-smna's feature identification and your cluster-level causal editing pipeline.")
